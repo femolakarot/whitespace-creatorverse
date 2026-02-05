@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Whitespace Creatorverse
 
-## Getting Started
+This is a Next.js project using the `app` directory and Tailwind.
 
-First, run the development server:
+Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 to view locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Vercel Deployment (recommended)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push your repo to GitHub.
+2. Import the repository in Vercel (vercel.com) and connect GitHub.
+3. Use the default build command `npm run build` and `next start` for production preview.
+4. If you need environment variables, add them in Vercel > Project Settings > Environment Variables.
 
-## Learn More
+Notes for Vercel optimization
 
-To learn more about Next.js, take a look at the following resources:
+- `next.config.ts` includes `output: 'standalone'` and `swcMinify: true` to produce optimized builds.
+- Keep the Node.js version consistent between local and Vercel (set under Project Settings).
+- The project uses client-side GSAP and framer-motion; these are bundled during build.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Features implemented
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Two "worlds": Creatorverse (landing) and Elite Circle, toggled via a flip switch in the header.
+- 3D flip animation implemented with GSAP.
+- Editable social handles and footer via an in-app editor (header -> Edit Socials).
+- FAQ accordion on the landing page using `framer-motion`.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you'd like, I can run a local build now to validate the production build.

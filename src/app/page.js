@@ -8,9 +8,10 @@ import EliteCircle from '@/components/views/EliteCircle';
 import Footer from '@/components/Footer';
 import FlipSwitch from '@/components/FlipSwitch';
 import Logo from '@/components/Logo';
+import SocialEditor from '@/components/SocialEditor';
 
 // --- EDITABLE SOCIALS (Shared across both worlds) ---
-const socialHandles = [
+const initialSocials = [
   { platform: "Instagram", url: "#", label: "@whitespace.verse" },
   { platform: "Twitter/X", url: "#", label: "@whitespace" },
   { platform: "LinkedIn", url: "#", label: "Whitespace Creatorverse" }
@@ -18,6 +19,9 @@ const socialHandles = [
 
 export default function Home() {
   const [isElite, setIsElite] = useState(false);
+  const [socialHandles, setSocialHandles] = useState(initialSocials);
+  const [isEditingSocials, setIsEditingSocials] = useState(false);
+  const [footerText, setFooterText] = useState('Lagos • London • The Metaverse');
   const containerRef = useRef(null);
   const contentRef = useRef(null);
 
@@ -25,7 +29,7 @@ export default function Home() {
   const handleToggle = () => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        onComplete: () => setIsElite(!isElite) // Switch content halfway
+        // no onComplete here; state will be flipped mid-timeline
       });
 
       // 1. Rotate OUT (90 degrees)
@@ -37,9 +41,9 @@ export default function Home() {
         ease: "power2.in",
       });
       
-      // 2. Set State (happens via onComplete above, but we pause timeline to wait)
+      // 2. Flip state so React mounts the other view before the rotate-in
       tl.add(() => {
-        // This gap allows React to render the new component
+        setIsElite((prev) => !prev);
       });
 
       // 3. Rotate IN (-90 to 0)
@@ -63,6 +67,13 @@ export default function Home() {
             <FlipSwitch isElite={isElite} onToggle={handleToggle} />
           </div>
 
+          {/* Social Editor Toggle (small button) */}
+          <div className="pointer-events-auto ml-6">
+            <button onClick={() => setIsEditingSocials(true)} className="text-xs uppercase tracking-widest bg-white/5 px-3 py-2 rounded-md">
+              Edit Socials
+            </button>
+          </div>
+
           {/* Socials (Desktop) */}
           <div className="hidden md:flex flex-col gap-1 text-[10px] uppercase tracking-widest text-right pointer-events-auto">
             {socialHandles.map((social) => (
@@ -82,7 +93,18 @@ export default function Home() {
         </div>
 
         {/* SHARED FOOTER */}
-        <Footer socials={socialHandles} />
+        <Footer socials={socialHandles} footerText={footerText} />
+
+        {/* SOCIALS EDITOR MODAL */}
+        {isEditingSocials && (
+          <SocialEditor
+            socials={socialHandles}
+            setSocials={setSocialHandles}
+            footerText={footerText}
+            setFooterText={setFooterText}
+            onClose={() => setIsEditingSocials(false)}
+          />
+        )}
 
       </main>
     </SmoothScroll>

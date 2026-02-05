@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
+  // Standalone output for server deployments (Vercel supports Next.js natively)
+  output: 'standalone',
 };
 
 export default nextConfig;

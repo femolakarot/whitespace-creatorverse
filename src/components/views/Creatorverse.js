@@ -10,13 +10,14 @@ export default function Creatorverse() {
     <div className="pt-20">
       
       {/* 1. HERO VIDEO (Static placeholder for logic) */}
-      <section className="h-[80vh] flex items-center justify-center relative overflow-hidden">
-        <video autoPlay muted loop playsInline className="absolute w-full h-full object-cover opacity-30">
-           <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-connection-lines-render-loop-42866-large.mp4" type="video/mp4" />
-        </video>
-        <div className="z-10 text-center">
-            <h1 className="text-8xl font-bold uppercase tracking-tighter">Whitespace</h1>
-            <p className="tracking-[0.5em] mt-4 uppercase text-xs">The Creatorverse</p>
+      <section className="h-[72vh] flex items-center justify-center relative overflow-hidden section-loose">
+        <div className="z-10 text-center fade-up in">
+            <h1 className="leading-tight">Visual communication solutions for modern challenges.</h1>
+            <p className="mt-6 lowercase tracking-widest text-sm text-gray-400" style={{letterSpacing:'.45em'}}>bridging the gap between traditional design and emerging technology.</p>
+        </div>
+
+        <div className="hero-graphic" aria-hidden>
+          <img src="/assets/hero-diagonal.svg" alt="hero graphic" />
         </div>
       </section>
 

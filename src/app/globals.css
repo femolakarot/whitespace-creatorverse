@@ -1,6 +1,14 @@
+/* Import refined fonts for a modern editorial feel */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Inter:wght@300;400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --accent: 212, 175, 55; /* gold */
+  --muted: 128,128,128;
+}
 
 :root {
   --foreground-rgb: 255, 255, 255;
@@ -11,6 +19,9 @@ body {
   background: rgb(var(--background-start-rgb));
   color: rgb(var(--foreground-rgb));
   -webkit-font-smoothing: antialiased;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-weight: 300;
+  line-height: 1.5;
 }
 
 /* Custom Scrollbar for that minimalist look */
@@ -24,3 +35,71 @@ body {
   background: #333;
   border-radius: 10px;
 }
+
+/* 3D perspective helpers for flip animation */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.perspective-container {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* subtle pulse animation used in Elite hero */
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+@keyframes pulse-slow {
+  0% { opacity: 1; transform: translateY(0); }
+  50% { opacity: 0.85; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Typographic scale for an editorial feel */
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  margin: 0 0 0.6em 0;
+}
+
+h1 { font-size: clamp(2.5rem, 6vw, 6rem); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 600; }
+
+.site-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Links and subtle accents */
+a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { color: rgb(var(--accent)); border-bottom-color: rgba(var(--accent),0.12); }
+
+/* Header tweaks for minimal nav */
+nav .pointer-events-auto > * { transition: opacity .2s ease, transform .2s ease; }
+
+/* Buttons */
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.06); padding: .5rem .9rem; border-radius: 6px; }
+
+/* Footer small text */
+.footer-small { font-size: .85rem; color: rgba(var(--muted), 1); }
+
+/* Motion helpers */
+.fade-up { transform: translateY(8px); opacity: 0; transition: transform .6s cubic-bezier(.2,.9,.2,1), opacity .6s ease; }
+.fade-up.in { transform: translateY(0); opacity: 1; }
+
+.pop { transform: translateY(0) scale(.98); transition: transform .36s cubic-bezier(.2,.9,.2,1); }
+.pop:hover { transform: translateY(-4px) scale(1.01); }
+
+/* Large appreciable switch styles */
+.big-switch { display:inline-flex; align-items:center; gap:12px; }
+.big-switch .switch-track { width:84px; height:44px; border-radius:999px; padding:6px; display:flex; align-items:center; background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06); }
+.big-switch .knob { width:32px; height:32px; border-radius:999px; background:white; box-shadow: 0 6px 18px rgba(2,2,2,0.55); transform: translateX(0); transition: transform .36s cubic-bezier(.2,.9,.2,1), background .2s; }
+.big-switch[data-active="true"] .knob { transform: translateX(40px); background: rgb(var(--accent)); }
+.big-switch .label { font-size: .78rem; letter-spacing: .12em; text-transform:uppercase; opacity: .9; }
+
+/* subtle section spacing */
+.section-tight { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+.section-loose { padding-top: 6rem; padding-bottom: 6rem; }
+
+/* hero graphic - light strokes inspired by editorial diagonal */
+.hero-graphic { position:absolute; inset:0; pointer-events:none; opacity:0.06; }
+.hero-graphic img { width:100%; height:100%; object-fit:cover; display:block; }
